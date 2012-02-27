@@ -1,0 +1,29 @@
+<project basedir="." name="tmplj" default="dist">
+	<property name="tools.jar" value="/usr/lib/jvm/java-7-openjdk/lib/tools.jar"/>
+	<target name="clean">
+		<delete dir="classes"/>
+	</target>
+	<target name="compile" depends="clean">
+		<mkdir dir="classes"/>
+		<javac srcdir="main" destdir="classes" includeantruntime="false"
+			classpath="${tools.jar}"/>
+	</target>
+	<target name="dist" depends="compile">
+		<tstamp />
+		<property name="dist.jar" value="dist/tmplj-${DSTAMP}-${TSTAMP}.jar"/>
+		<jar destfile="${dist.jar}" basedir="classes"/>
+	</target>
+	<target name="test" depends="dist">
+		<javac srcdir="test" destdir="classes" includeantruntime="false">
+			<classpath>
+				<filelist>
+					<file name="${tools.jar}"/>
+				</filelist>
+			</classpath>
+		</javac>
+		<property name="test.class.path" value="${tools.jar}:${dist.jar}:classes"/>
+		<echo message="${test.class.path}"/>
+		<java classname="tmplj.test.Main"
+			classpath="${test.class.path}" fork="true"/>
+	</target>
+</project>
