@@ -3,21 +3,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><print expr="abean.getTitle()" escape="basic-xml"></title>
+		<title><print expr="abean.getTitle()"></title>
 	</head>
 	<body>
 		<for expr="int i : new int[] {1,2,3,4,5,6,7,8,9,10}">
 			<if expr="i % 2 == 0">
-				<p>i%2==0! -> <print expr="i" escape="basic-xml"></p>
+				<p>i%2==0! -> <print expr="i"></p>
 			<elseif expr="i % 3 == 0">
-				<p>i%3==0! -> <print expr="i" escape="basic-xml"></p>
+				<p>i%3==0! -> <print expr="i"></p>
 			<else>
-				<p>i = <print expr="i" escape="basic-xml"></p>
+				<p>i = <print expr="i"></p>
 			</if>
 			<do expr="abean.setSum(abean.getSum() + i)">
 		</for>
 		<var type="int" name="sum" expr="abean.getSum()">
 		<set name="sum" expr="sum + 5">
-		The sum plus five is <print expr="sum" escape="basic-xml">
+		The sum plus five is <print expr="sum">
 	</body>
 </html>

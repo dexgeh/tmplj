@@ -10,7 +10,7 @@ public class Main {
 		System.out.println(new File(".").getCanonicalPath());
 		Template template = Loader.fromFile("test/tmplj/test/test1.html", "UTF-8", null);
 		ABean aBean = new ABean();
-		aBean.setTitle("myTitle");
+		aBean.setTitle("myTitle --> &'\"<> ");
 		System.out.println(template.render(aBean));
 	}
 }
