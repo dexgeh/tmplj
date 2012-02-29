@@ -16,25 +16,19 @@ public class Strings {
 	private static String[] escape_replacements =
 			new String [] {"&lt;","&gt;","&apos;", "&quot;", "&amp;"};
 	public static String escapeBasic(String input) {
-		StringBuilder out = new StringBuilder(input);
-		int[] I = new int[5];
-		do {
-			I[0] = I[0] == -1 ? I[0] : input.indexOf('<');
-			I[1] = I[1] == -1 ? I[1] : input.indexOf('>');
-			I[2] = I[2] == -1 ? I[2] : input.indexOf('\'');
-			I[3] = I[3] == -1 ? I[3] : input.indexOf('\"');
-			I[4] = I[4] == -1 ? I[4] : input.indexOf('&');
-			for (int i=0;i<I.length;i++) {
-				if (I[i] != -1) {
-					out.replace(I[i], I[i]+1, escape_replacements[i]);
-				}
+		StringBuilder out = new StringBuilder();
+		int len = input.length();
+		for (int i=0;i<len;i++) {
+			char c = input.charAt(i);
+			switch (c) {
+			case '<': out.append("&lt;");break;
+			case '>': out.append("&gt;");break;
+			case '"': out.append("&quot;");break;
+			case '\'': out.append("&apos;");break;
+			case '&': out.append("&amp;");break;
+			default: out.append(c); break;
 			}
-		} while (
-				   I[0] != -1
-				|| I[1] != -1
-				|| I[2] != -1
-				|| I[3] != -1
-				|| I[4] != -1);
+		}
 		return out.toString();
 	}
 }
